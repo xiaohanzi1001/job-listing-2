@@ -1,4 +1,5 @@
 class Job < ApplicationRecord
+    has_many :resumes
   scope :published, -> { where(is_hidden: false) }
   scope :recent, -> { order('created_at DESC') }
 
@@ -6,6 +7,8 @@ class Job < ApplicationRecord
   validates :wage_upper_bound, presence: true
   validates :wage_lower_bound, presence: true
   validates :wage_lower_bound, numericality: { greater_than: 0}
+
+
 
   def publish!
     self.is_hidden =false
